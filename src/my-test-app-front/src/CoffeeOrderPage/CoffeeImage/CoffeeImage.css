@@ -1,0 +1,14 @@
+.coffee-image {
+    /* далее убрать */
+    width: 20rem;
+    height: 20rem;
+}
+
+.coffee-image__img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: 50%;
+	background-position-y: 50%;
+}

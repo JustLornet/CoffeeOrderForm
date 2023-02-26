@@ -1,0 +1,40 @@
+.order-history__container {
+	margin: 15vh 34vw;
+	border: 2px solid black;
+	border-radius: 2rem;
+	padding: 2rem;
+    background-color: rgba(224, 224, 224, 0.8);
+}
+
+.order-history__body {
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.order-history__order-position {
+	cursor: pointer;
+	font-weight: 400;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+}
+
+.order-history__order-position:hover {
+	text-decoration: underline;
+	color: darkgreen;
+	font-weight: 500;
+	border-top: 0.5px solid lightgray;
+	border-bottom: 0.5px solid lightgray;
+}
+
+.order-history__close-button {
+	font-size: 1.1rem;
+}
+
+.order-history__main-header {
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.order-history__search {
+max-width: 16rem;
+}

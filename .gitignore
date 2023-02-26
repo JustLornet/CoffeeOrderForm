@@ -1,0 +1,11 @@
+src/.vs/
+src/MyTestAppBack/MyTestAppBack.DataAccess/obj/
+src/MyTestAppBack/MyTestAppBack.Domain/obj/
+src/MyTestAppBack/MyTestAppBack.Infrastructure/obj/
+src/MyTestAppBack/MyTestAppBack/bin/
+src/MyTestAppBack/MyTestAppBack/obj/
+src/MyTestAppBack/MyTestAppBack/wwwroot/
+src/MyTestAppBack/MyTestAppBack.DataAccess/bin/
+src/MyTestAppBack/.vs/MyTestAppBack/FileContentIndex/
+src/MyTestAppBack/.vs/
+src/MyTestAppBack/MyTestAppBack.Domain/bin/

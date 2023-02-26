@@ -1,0 +1,9 @@
+.coffee-composition {
+	overflow-y: auto;
+}
+
+.coffee-composition_loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

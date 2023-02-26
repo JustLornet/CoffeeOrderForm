@@ -1,0 +1,21 @@
+.date-time {
+
+}
+
+.date-time__picker {
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    background-color: #E0E0E0;
+}
+
+.date-time__feed-back {
+    font-size: 0.9rem;
+    color: #EEEEEE;
+    line-height: 0.6rem;
+    position: absolute;
+    top: -1.2rem;
+    background-color: #D32F2F;
+border-radius: 0.3rem;
+padding: 0.5rem 0.2rem;
+}

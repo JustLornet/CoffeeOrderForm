@@ -1,0 +1,42 @@
+.page-footer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.page-footer__save-button {
+	border: none;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	width: auto;
+	border-bottom-right-radius: 1rem;
+	position: absolute;
+	background-color: #43a047;
+	color: #eeeeee;
+	font-size: 1rem;
+	font-weight: 550;
+	border: 2px solid transparent;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+.page-footer__save-button:hover {
+	background-color: #66bb6a;
+}
+
+.page-footer__save-button:active {
+	background-color: #2e7d32;
+	border: 2px solid #689f38;
+	color: white;
+}
+
+.page-footer__order-date {
+	width: 8rem;
+}
+
+.page-footer__order-time {
+	width: 6rem;
+}
