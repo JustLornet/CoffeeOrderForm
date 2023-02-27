@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./RadioButton.css";
 import { Input, FormGroup, Label } from "reactstrap";
@@ -23,6 +23,8 @@ const RadioButton = ({
 	style,
 	// стиль для каждого элмента - radio button
 	itemStyle,
+	// ориентороваться на значения из redux, а не локального хранилища
+	useReduxValues = true,
 	// Тип компонента определяет его вид и особенности
 	// на данный момент тип может быть 'bool' И 'dict'
 	// bool - только true false, dict - значения берутся словаря
@@ -79,6 +81,13 @@ const RadioButton = ({
 	// сохранение значения в локальное хранилище
 	const [localStateValue, setLocalStateValue] = useState(initValue ?? null);
 
+	useEffect(() => {
+		// при исользовании значений из редакс
+		if (useReduxValues && localStateValue != initValue) {
+			setLocalStateValue(initValue);
+		}
+	}, [initValue]);
+
 	const parseToRadio = item => {
 		return (
 			<FormGroup
@@ -88,6 +97,11 @@ const RadioButton = ({
 			>
 				<Label>
 					<Input
+						// {...console.log(
+						// 	item,
+						// 	localStateValue,
+						// 	localStateValue ? item.id == localStateValue.id : false
+						// )}
 						name={propertyName}
 						value={item.id}
 						checked={localStateValue ? item.id == localStateValue.id : false}
@@ -184,7 +198,9 @@ const RadioButton = ({
 					style={style}
 					className="radio-button"
 				>
-					<FormGroup className="radio-button__group-container">{getRadioButtonViaType()}</FormGroup>
+					<FormGroup className="radio-button__group-container">
+						{getRadioButtonViaType()}
+					</FormGroup>
 				</div>
 			) : null}
 		</React.Fragment>

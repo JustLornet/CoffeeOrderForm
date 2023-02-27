@@ -353,7 +353,6 @@ const CoffeeOrderPage = ({
 };
 
 const mapStateToProps = state => {
-	// console.log(state);
 	return {
 		coffeeOrderPage: state.coffeeOrderPage,
 		selections: state.coffeeOrderPage.selections,
