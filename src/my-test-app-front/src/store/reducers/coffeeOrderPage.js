@@ -71,6 +71,7 @@ const insertCustomComposition = (itemId, newValue, currentObject) => {
 };
 
 const coffeeOrderPage = (state = initState, action) => {
+	// console.log(action)
 	switch (action.type) {
 		case REQUEST_DATA:
 			return { ...state, isFetching: true };

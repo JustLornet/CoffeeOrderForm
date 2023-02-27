@@ -45,6 +45,8 @@ const DateTime = ({
 	try {
 		if (reducer && propertyName) {
 			initValue = state[reducer].instance[propertyName];
+		} else if (value) {
+			initValue = parseISO(value);
 		}
 	} catch {
 		console.log(`Property ${propertyName} not found`);
@@ -52,9 +54,12 @@ const DateTime = ({
 		// TODO: далее добавить обработку
 	}
 
+	// сохранение значения в локальное хранилище
+	const [localStateValue, setLocalStateValue] = useState(initValue);
+
 	useEffect(() => {
-		if (value && parseISO(value) != localStateValue) {
-			handleChange(parseISO(value));
+		if (value && value != moment(localStateValue).format()) {
+			handleChange(value);
 		}
 	}, [value]);
 
@@ -65,9 +70,6 @@ const DateTime = ({
 		updateReduxValue(reducer, propertyName, newValue);
 	};
 
-	// сохранение значения в локальное хранилище
-	const [localStateValue, setLocalStateValue] = useState(initValue);
-
 	/**значение передаем в формате ISO */
 	const handleInnerChange = newDateTime => {
 		handleChange(newDateTime);
@@ -76,6 +78,7 @@ const DateTime = ({
 	/**
 	 * Метод, принимающий новое значение, запускает изменения состояния
 	 * как хранилища redux, так и локального
+	 * значение должно приходить в формате ISO
 	 */
 	const handleChange = newDateTime => {
 		// обработка значения в завсимости от типа
