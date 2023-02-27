@@ -32,7 +32,6 @@ const CoffeePageFooter = ({
 	 * @param {*в формате moment} newValue
 	 */
 	const handleInnerChange = (currentType, newValue) => {
-		console.log(localDateTime, newValue);
 		let newDateTime = null;
 		switch (currentType) {
 			case "time":
@@ -40,14 +39,12 @@ const CoffeePageFooter = ({
 					`${newValue.format("HHmmss")} ${moment(localDateTime).format("DDMMYYYY")}`,
 					"HHmmss DDMMYYYY"
 				);
-				console.log(newDateTime);
 				break;
 			case "date":
 				newDateTime = moment(
 					`${moment(localDateTime).format("HHmmss")} ${newValue.format("DDMMYYYY")}`,
 					"HHmmss DDMMYYYY"
 				);
-				console.log(newDateTime);
 				break;
 		}
 
@@ -55,7 +52,6 @@ const CoffeePageFooter = ({
 	};
 
 	const handleChange = (newMoment, initNewValueISO) => {
-		console.log(orderTimeISO, initNewValueISO);
 		setLocalDateTime(newMoment.format());
 		if (orderTimeISO != initNewValueISO) {
 			updateValue(newMoment.format());
