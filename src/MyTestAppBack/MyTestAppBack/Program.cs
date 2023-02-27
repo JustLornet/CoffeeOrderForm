@@ -10,7 +10,8 @@ builder.Services.AddCors(options =>
         policy =>
         {
             // переделать для релиза
-            policy.WithOrigins("http://localhost:3001").AllowAnyHeader().AllowAnyMethod();
+            //policy.WithOrigins("http://localhost:3001").AllowAnyHeader().AllowAnyMethod();
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
         });
 }) ;
 builder.Services.AddControllers();
