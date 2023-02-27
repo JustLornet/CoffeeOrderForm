@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Label } from "reactstrap";
 import DateTime from "../../Common/DateTime/DateTime";
 import "./CoffeePageFooter.css";
@@ -6,37 +6,60 @@ import moment from "moment";
 
 const CoffeePageFooter = ({
 	isConfirmEnabled,
+	// в формате ISO без time zone
 	orderDateTime,
 	confirmOrder = f => f,
 	updateValue = f => f,
 }) => {
-	// дата и время, объединенные вместе в формате moment
+	// пришедше значение в формает ISO
+	const orderTimeISO = moment(orderDateTime).format();
+
+	// дата и время, объединенные вместе в формате ISO
 	const [localDateTime, setLocalDateTime] = useState(
-		moment(orderDateTime ?? "01010001 000000", "DDMMYYYY HHmmss")
+		orderDateTime ? orderTimeISO : moment("01010001 000000", "DDMMYYYY HHmmss").format()
 	);
+
+	useEffect(() => {
+		if (orderTimeISO != localDateTime) {
+			console.log(orderDateTime, localDateTime);
+			setLocalDateTime(orderTimeISO);
+		}
+	}, [orderDateTime]);
+
+	/**
+	 * Отдельно считываем дату и время и изменяем в текущей дате-времени, хранящейся локально в state
+	 * @param {*} currentType
+	 * @param {*в формате moment} newValue
+	 */
 	const handleInnerChange = (currentType, newValue) => {
-		let newDateTime = moment(localDateTime);
+		console.log(localDateTime, newValue);
+		let newDateTime = null;
 		switch (currentType) {
-			case "date":
-				newDateTime = moment(
-					`${localDateTime.format("HHmmss")} ${newValue.format("DDMMYYYY")}`,
-					"HHmmss DDMMYYYY"
-				);
-				break;
 			case "time":
 				newDateTime = moment(
-					`${newValue.format("HHmmss")} ${localDateTime.format("DDMMYYYY")}`,
+					`${newValue.format("HHmmss")} ${moment(localDateTime).format("DDMMYYYY")}`,
 					"HHmmss DDMMYYYY"
 				);
+				console.log(newDateTime);
+				break;
+			case "date":
+				newDateTime = moment(
+					`${moment(localDateTime).format("HHmmss")} ${newValue.format("DDMMYYYY")}`,
+					"HHmmss DDMMYYYY"
+				);
+				console.log(newDateTime);
 				break;
 		}
 
-		handleChange(newDateTime);
+		handleChange(newDateTime, newValue.format());
 	};
 
-	const handleChange = newMoment => {
-		setLocalDateTime(newMoment);
-		updateValue(newMoment.format());
+	const handleChange = (newMoment, initNewValueISO) => {
+		console.log(orderTimeISO, initNewValueISO);
+		setLocalDateTime(newMoment.format());
+		if (orderTimeISO != initNewValueISO) {
+			updateValue(newMoment.format());
+		}
 	};
 
 	return (
@@ -49,7 +72,7 @@ const CoffeePageFooter = ({
 				style={{ margin: "0 1rem" }}
 				type="date"
 				isRequired
-				value={orderDateTime}
+				value={orderDateTime ? orderTimeISO : null}
 				customOnChange={value => handleInnerChange("date", value)}
 			/>
 			<DateTime
@@ -57,7 +80,7 @@ const CoffeePageFooter = ({
 				style={{ margin: "0 1rem" }}
 				type="time"
 				isRequired
-				value={orderDateTime}
+				value={orderDateTime ? orderTimeISO : null}
 				customOnChange={value => handleInnerChange("time", value)}
 			/>
 			<Button

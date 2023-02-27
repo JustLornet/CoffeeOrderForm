@@ -68,31 +68,6 @@ const TextField = ({
 		// TODO: далее добавить обработку
 	}
 
-	useEffect(() => {
-		if (disabled && clearOnDisable) {
-			handleChange(null);
-		}
-	}, [disabled]);
-
-	useEffect(() => {
-		setIsValid(checkIsValid(localStateValue));
-		setIsInvalid(checkIsInvalid(localStateValue));
-	}, [isRequired]);
-
-	useEffect(() => {
-		// в случае использования значений из redux
-		if (useReduxValues && localStateValue != initValue) {
-			handleChange(initValue);
-		}
-	}, [initValue]);
-
-	/**
-	 * Обработчик изменений в redux
-	 */
-	const updateReduxValueInner = newValue => {
-		updateReduxValue(reducer, propertyName, newValue);
-	};
-
 	/**
 	 * проверка на то, валидно ли данное значение
 	 * true - если валидно
@@ -152,6 +127,24 @@ const TextField = ({
 	// проверка на невалидность поля; если невалидно, поле подсвечивается красным
 	const [isInvalid, setIsInvalid] = useState(checkIsInvalid(initValue));
 
+	useEffect(() => {
+		if (disabled && clearOnDisable && localStateValue) {
+			handleChange(null);
+		}
+	}, [disabled]);
+
+	useEffect(() => {
+		setIsValid(checkIsValid(localStateValue));
+		setIsInvalid(checkIsInvalid(localStateValue));
+	}, [isRequired]);
+
+	useEffect(() => {
+		// в случае использования значений из redux
+		if (useReduxValues && localStateValue != initValue) {
+			handleChange(initValue);
+		}
+	}, [initValue]);
+
 	const handleInnerChange = ev => {
 		ev.preventDefault();
 		const newValue = parseViaType(ev.target.value, typeOfValue);
@@ -191,6 +184,13 @@ const TextField = ({
 		console.log(`${type} - отсутствует парсинг для данного типа`);
 
 		return null;
+	};
+
+	/**
+	 * Обработчик изменений в redux
+	 */
+	const updateReduxValueInner = newValue => {
+		updateReduxValue(reducer, propertyName, newValue);
 	};
 
 	/**

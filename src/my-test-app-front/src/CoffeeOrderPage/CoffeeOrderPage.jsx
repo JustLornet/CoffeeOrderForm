@@ -31,7 +31,7 @@ const CoffeeOrderPage = ({
 }) => {
 	// reducer для текущей страницы, необходимо для переиспользования общих компонентов
 	const currentReducer = "coffeeOrderPage";
-	const instance = coffeeOrderPage.instance;
+
 	// получение элементов с бэка при первом рендере компонента
 	useEffect(() => {
 		if (checkIfSelectionsIsIncomplete(selections)) {
@@ -103,9 +103,7 @@ const CoffeeOrderPage = ({
 												<TextField
 													reducer={currentReducer}
 													propertyName="customerName"
-													// костыль - при вызове модального окна textfield с invalid
-													// отображается сквазь модальное окно
-													isRequired={!modalIsOpen}
+													isRequired
 													placeholder="имя"
 													useReduxValues
 												/>
@@ -355,8 +353,7 @@ const CoffeeOrderPage = ({
 };
 
 const mapStateToProps = state => {
-	console.log(state);
-
+	// console.log(state);
 	return {
 		coffeeOrderPage: state.coffeeOrderPage,
 		selections: state.coffeeOrderPage.selections,
