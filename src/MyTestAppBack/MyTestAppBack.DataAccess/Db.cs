@@ -11,11 +11,12 @@ namespace MyTestAppBack.DataAccess
 {
     public class Db : DbContext
     {
-        public Db(DbContextOptions<Db> options) : base(options)
+        public Db(DbContextOptions options) : base(options)
         {
-            // TODO: включить, когда всё будет готово
-            // отключено, чтобы не было ошибок при миграциях
-            //Database.EnsureCreated();
+            // TODO: отключено во время теста, чтобы не было ошибок при миграциях
+#if RELEASE
+            Database.EnsureCreated();
+#endif
         }
 
         public DbSet<CoffeeType> CoffeeTypes => Set<CoffeeType>();

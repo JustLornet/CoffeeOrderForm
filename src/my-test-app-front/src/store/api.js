@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_BACK_PATH = "https://localhost:7133";
+export const BASE_BACK_PATH = "http://localhost:5001";
 
 export const get = path => {
 	const config = {

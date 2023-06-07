@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyTestAppBack.DataAccess;
+using MyTestAppBack.Utils;
+using MyTestAppBack.DataAccess.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,15 @@ builder.Services.AddCors(options =>
             policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
         });
 }) ;
+
+// получение данных о текущей БД
+var currentDb = ReadAppConfig.GetCurrentDb(out string connectionString);
+var dbOptions = DbOptionsFactory.GetOptionsViaDb(currentDb, connectionString);
+
+// добавление сервисов через di контейнер
 builder.Services.AddControllers();
-builder.Services.AddDbContext<Db>(options => options.UseSqlite(DbConfig.DbConnectionString));
+builder.Services.AddScoped<Db>((services) => new Db(dbOptions));
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();

@@ -23,7 +23,6 @@ namespace MyTestAppBack.Controllers
         [HttpGet]
         public IActionResult GetImage(string path)
         {
-            // TODO: далее учесть wroot для релизной версии
             var currentDirectory = _hostingEnvironment.ContentRootPath;
             var requestedPath = Path.Combine(currentDirectory, path);
 

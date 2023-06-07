@@ -1,0 +1,9 @@
+{
+  "DbInfo": {
+    "currentDb": "SqlServer",
+    "connectionStrings": {
+      "Sqlite": "Data Source=CoffeeDb.db",
+      "SqlServer": "Data Source=db;Database=CoffeeDb;Integrated Security=false;User ID=sa;Password=myStrongPassword!;MultipleActiveResultSets=True;TrustServerCertificate=True"
+    }
+  }
+}
